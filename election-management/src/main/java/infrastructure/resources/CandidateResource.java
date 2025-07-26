@@ -16,29 +16,28 @@ import java.util.List;
 @Consumes(MediaType.APPLICATION_JSON)
 @Path("/api/candidates")
 public class CandidateResource {
-	private final CandidateApi api;
+    private final CandidateApi api;
 
-	public CandidateResource(CandidateApi api) {
+    public CandidateResource(CandidateApi api) {
+        this.api = api;
+    }
 
-		this.api = api;
-	}
+    @POST
+    @ResponseStatus(RestResponse.StatusCode.CREATED)
+    @Transactional
+    public void create(CreateCandidate dto) {
+        api.create(dto);
+    }
 
-	@POST
-	@ResponseStatus(RestResponse.StatusCode.CREATED)
-	@Transactional
-	public void create(CreateCandidate dto) {
-		api.create(dto);
-	}
+    @PUT
+    @Path("/{id}")
+    @Transactional
+    public Candidate update(@PathParam("id") String id, UpdateCandidate dto) {
+        return api.update(id, dto);
+    }
 
-	@PUT
-	@Path("/{id}")
-	@Transactional
-	public Candidate update(@PathParam("id") String id, UpdateCandidate dto) {
-		return api.update(id, dto);
-	}
-
-	@GET
-	public List<Candidate> list() {
-		return api.list();
-	}
+    @GET
+    public List<Candidate> list() {
+        return api.list();
+    }
 }

@@ -7,11 +7,11 @@ import java.util.Set;
 
 @FreeBuilder
 public interface CandidateQuery {
-	Optional<Set<String>> ids();
+    Optional<Set<String>> ids();
 
-	Optional<String> name();
+    Optional<String> name();
 
-	class Builder extends CandidateQuery_Builder {
-	}
+    class Builder extends CandidateQuery_Builder {
+    }
 
 }
